@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 侧边菜单栏 -->
+<nav id="sidebar" th:fragment="sidebar-nav">
+    <!-- Sidebar Scroll Container -->
+    <div id="sidebar-scroll">
+        <!-- Sidebar Content -->
+        <!-- Adding .sidebar-mini-hide to an element will hide it when the sidebar is in mini mode -->
+        <div class="sidebar-content">
+            <!-- Side Header -->
+            <div class="side-header side-content bg-white-op">
+                <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
+                <button class="btn btn-link text-gray pull-right hidden-md hidden-lg" type="button" data-toggle="layout" data-action="sidebar_close">
+                    <i class="fa fa-times"></i>
+                </button>
+                <!-- Themes functionality initialized in App() -> uiHandleTheme() -->
+                <div class="btn-group pull-right">
+                    <button class="btn btn-link text-gray dropdown-toggle" data-toggle="dropdown" type="button">
+                        <i class="si si-drop"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right font-s13 sidebar-mini-hide">
+                        <li>
+                            <a data-toggle="theme" data-theme="default" tabindex="-1" href="javascript:void(0)">
+                                <i class="fa fa-circle text-default pull-right"></i> <span class="font-w600">默认</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="theme" data-theme="/assets/css/themes/amethyst.min.css" tabindex="-1" href="javascript:void(0)">
+                                <i class="fa fa-circle text-amethyst pull-right"></i> <span class="font-w600">紫水晶</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="theme" data-theme="/assets/css/themes/city.min.css" tabindex="-1" href="javascript:void(0)">
+                                <i class="fa fa-circle text-city pull-right"></i> <span class="font-w600">城市</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="theme" data-theme="/assets/css/themes/flat.min.css" tabindex="-1" href="javascript:void(0)">
+                                <i class="fa fa-circle text-flat pull-right"></i> <span class="font-w600">平坦</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="theme" data-theme="/assets/css/themes/modern.min.css" tabindex="-1" href="javascript:void(0)">
+                                <i class="fa fa-circle text-modern pull-right"></i> <span class="font-w600">现代化</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="theme" data-theme="/assets/css/themes/smooth.min.css" tabindex="-1" href="javascript:void(0)">
+                                <i class="fa fa-circle text-smooth pull-right"></i> <span class="font-w600">光滑</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <a class="h5 text-white" th:href="@{/admin/index}">
+                    <i class="fa fa-circle-o-notch text-primary"></i> <span class="h4 font-w600 sidebar-mini-hide">yu</span>
+                </a>
+            </div>
+            <!-- END Side Header -->
+
+            <!-- Side Content -->
+            <div class="side-content">
+                <ul class="nav-main">
+                    <li>
+                        <a th:class="${activeUrl=='index.html'?'nav-submenu active':'nav-submenu'}" th:href="@{/admin/index}"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">仪表盘</span></a>
+                    </li>
+                    <li class="nav-main-heading"><span class="sidebar-mini-hide">用户界面</span></li>
+                    <li>
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-badge"></i><span class="sidebar-mini-hide">UI元素</span></a>
+                        <ul>
+                            <li>
+                                <a href="#">小部件</a>
+                            </li>
+                            <li>
+                                <a href="#">颜色主题</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li th:class="${openUrl=='table'?'open':''}">
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-grid"></i><span class="sidebar-mini-hide">表格</span></a>
+                        <ul>
+                            <li>
+                                <a th:class="${activeUrl=='table.html'?'active':''}" th:href="@{/admin/table}">样式</a>
+                            </li>
+                            <li>
+                                <a href="#">响应</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-note"></i><span class="sidebar-mini-hide">表单</span></a>
+                        <ul>
+                            <li>
+                                <a href="#">预值</a>
+                            </li>
+                            <li>
+                                <a href="#">元素</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-main-heading"><span class="sidebar-mini-hide">开发</span></li>
+                    <li>
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-wrench"></i><span class="sidebar-mini-hide">组件</span></a>
+                        <ul>
+                            <li>
+                                <a href="#">图片</a>
+                            </li>
+                            <li>
+                                <a href="#">图表</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-magic-wand"></i><span class="sidebar-mini-hide">布局</span></a>
+                        <ul>
+                            <li>
+                                <a href="#">布局API</a>
+                            </li>
+                            <li>
+                                <a href="#">默认</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-puzzle"></i><span class="sidebar-mini-hide">多级菜单</span></a>
+                        <ul>
+                            <li>
+                                <a href="#">一级</a>
+                            </li>
+                            <li>
+                                <a href="#">二级</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- END Side Content -->
+        </div>
+        <!-- Sidebar Content -->
+    </div>
+    <!-- END Sidebar Scroll Container -->
+</nav>
+<!-- END 侧边菜单栏 -->
+</html>

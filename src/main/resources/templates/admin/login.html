@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--[if IE 9]>         <html class="ie9 no-focus"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-focus"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+
+    <title>登录</title>
+
+    <meta name="description" content="OneUI - Admin Dashboard Template & UI Framework">
+    <meta name="author" content="pixelcave">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
+
+    <!-- Icons -->
+    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+    <link rel="shortcut icon" th:href="@{/assets/img/favicons/favicon.png}">
+
+    <link rel="icon" type="image/png" th:href="@{/assets/img/favicons/favicon-16x16.png}" sizes="16x16">
+    <link rel="icon" type="image/png" th:href="@{/assets/img/favicons/favicon-32x32.png}" sizes="32x32">
+    <link rel="icon" type="image/png" th:href="@{/assets/img/favicons/favicon-96x96.png}" sizes="96x96">
+    <link rel="icon" type="image/png" th:href="@{/assets/img/favicons/favicon-160x160.png}" sizes="160x160">
+    <link rel="icon" type="image/png" th:href="@{/assets/img/favicons/favicon-192x192.png}" sizes="192x192">
+
+    <link rel="apple-touch-icon" sizes="57x57" th:href="@{/assets/img/favicons/apple-touch-icon-57x57.png}">
+    <link rel="apple-touch-icon" sizes="60x60" th:href="@{/assets/img/favicons/apple-touch-icon-60x60.png}">
+    <link rel="apple-touch-icon" sizes="72x72" th:href="@{/assets/img/favicons/apple-touch-icon-72x72.png}">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/favicons/apple-touch-icon-76x76.png}">
+    <link rel="apple-touch-icon" sizes="114x114" th:href="@{/assets/img/favicons/apple-touch-icon-114x114.png}">
+    <link rel="apple-touch-icon" sizes="120x120" th:href="@{/assets/img/favicons/apple-touch-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="144x144" th:href="@{/assets/img/favicons/apple-touch-icon-144x144.png}">
+    <link rel="apple-touch-icon" sizes="152x152" th:href="@{/assets/img/favicons/apple-touch-icon-152x152.png}">
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/assets/img/favicons/apple-touch-icon-180x180.png}">
+    <!-- END Icons -->
+
+    <!-- Stylesheets -->
+    <!-- Web fonts -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
+
+    <!-- OneUI CSS framework -->
+    <link rel="stylesheet" id="css-main" th:href="@{/assets/css/oneui.css}">
+
+    <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
+    <!-- <link rel="stylesheet" id="css-theme" th:href="@{/assets/css/themes/flat.min.css"> -->
+    <!-- END Stylesheets -->
+    <script>
+        function alertError(){
+            document.getElementById("alertErrorButton").click();
+        }
+    </script>
+</head>
+<body th:attr="${#strings.isEmpty(message)}?_:onload='alertError()'">
+<!-- Page Container -->
+<div class="sidebar-l sidebar-mini sidebar-o side-scroll header-navbar-fixed header-navbar-transparent">
+
+    <!-- Main Container -->
+    <main id="main-container">
+        <!-- Hero Content -->
+        <div class="bg-primary-dark">
+            <section class="content content-full content-boxed overflow-hidden">
+                <!-- Section Content -->
+                <div class="push-100-t push-50 text-center">
+                    <h1 class="h2 text-white push-10 visibility-hidden" data-toggle="appear" data-class="animated fadeInDown">登录到仪表板!</h1>
+                    <h2 class="h5 text-white-op visibility-hidden" data-toggle="appear" data-class="animated fadeInDown">无限的想法！无限的力量！无限的欢乐！无限的机会!</h2>
+                </div>
+                <div class="row visibility-hidden" data-toggle="appear" data-class="animated fadeInUp">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <img class="img-responsive pull-b" th:src="@{/assets/img/various/promo1.jpg}" alt="">
+                    </div>
+                </div>
+                <!-- END Section Content -->
+            </section>
+        </div>
+        <!-- END Hero Content -->
+
+        <!-- Log In Form -->
+        <div class="bg-white">
+            <div class="alert alert-danger alert-dismissable" data-dismiss="alert" th:style="${#strings.isEmpty(message)}?'display: none':''">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">×</font></font></button>
+                <h3 class="font-w300 push-15"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">错误</font></font></h3>
+                <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" th:text="${message}">哎呀，错误</font></font></p>
+            </div>
+            <section class="content content-boxed">
+                <!-- Section Content -->
+                <div class="row items-push push-50-t push-30">
+                    <div class="col-md-6 col-md-offset-3">
+                        <form class="js-validation-material form-horizontal push-10-t" th:action="@{/admin/login}" method="post">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <div class="form-material form-material-primary" data-animation-class="bounce">
+                                        <input class="form-control" type="text" id="userName" name="userName" placeholder="输入您的用户名...">
+                                        <label for="userName">用户名</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <div class="form-material form-material-primary" data-animation-class="bounce">
+                                        <input class="form-control" type="password" id="password" name="password" placeholder="输入您的密码...">
+                                        <label for="password">密码</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12 text-center">
+                                    <label class="css-input switch switch-sm switch-primary">
+                                        <input type="checkbox" id="frontend-login-remember-me" name="frontend-login-remember-me"><span></span> 记住我?
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                                    <button class="btn btn-block btn-primary" type="submit" data-notify-type="danger" data-notify-icon="fa fa-times" data-notify-message="Update failed! :-("><i class="fa fa-arrow-right pull-right"></i>登录</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- END Section Content -->
+            </section>
+        </div>
+        <div style="display: none">
+            <button id="alertErrorButton" class="js-notify btn btn-sm btn-danger" data-notify-type="danger" data-notify-icon="fa fa-times" data-notify-message="用户名或密码错误，请核对！"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">错误</font></font></button>
+            <!-- Sign Up Today -->
+        </div>
+
+        <!-- END Log In Form -->
+        <!-- Sign Up Today -->
+        <div class="bg-gray-lighter">
+            <section class="content content-full content-boxed">
+                <!-- Section Content -->
+                <div class="push-20-t push-20 text-center">
+                    <h3 class="h4 push-20 visibility-hidden" data-toggle="appear">还没有帐号?</h3>
+                    <a class="btn btn-rounded btn-noborder btn-lg btn-success visibility-hidden" data-toggle="appear" data-class="animated bounceIn" href="frontend_signup.html">立即注册</a>
+                </div>
+                <!-- END Section Content -->
+            </section>
+        </div>
+        <!-- END Sign Up Today -->
+    </main>
+    <!-- END Main Container -->
+
+</div>
+<!-- END Page Container -->
+
+<!-- OneUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock, Appear, CountTo, Placeholder, Cookie and App.js -->
+<script th:src="@{/assets/js/core/jquery.min.js}"></script>
+<script th:src="@{/assets/js/core/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/core/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/assets/js/core/jquery.scrollLock.min.js}"></script>
+<script th:src="@{/assets/js/core/jquery.appear.min.js}"></script>
+<script th:src="@{/assets/js/core/jquery.countTo.min.js}"></script>
+<script th:src="@{/assets/js/core/jquery.placeholder.min.js}"></script>
+<script th:src="@{/assets/js/core/js.cookie.min.js}"></script>
+<script th:src="@{/assets/js/app.js}"></script>
+
+<!-- Page JS Plugins -->
+<script th:src="@{/assets/js/plugins/jquery-validation/jquery.validate.min.js}"></script>
+
+<!-- Page JS Code -->
+<script th:src="@{/assets/js/pages/base_forms_validation.js}"></script>
+
+<!-- Page JS Plugins -->
+<script th:src="@{/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js}"></script>
+<!-- Page JS Code -->
+<script>
+    $(function () {
+        // Init page helpers (Appear plugin)
+        App.initHelpers('appear');
+        App.initHelpers('notify');
+    });
+</script>
+</body>
+</html>

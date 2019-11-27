@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--[if IE 9]>         <html class="ie9 no-focus"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-focus"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Cropper.js</title>
+    <title>OneUI </title>
+    <link rel="shortcut icon" th:href="@{/assets/img/favicons/favicon.png}">
+
+    <link rel="stylesheet" th:href="@{/assets/cropper/css/cropper.css}">
+    <style>
+        .container {
+            margin: 20px auto;
+            max-width: 640px;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .cropper-view-box,
+        .cropper-face {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Crop a round image</h1>
+    <h3>Image</h3>
+    <div>
+        <img id="image" th:src="@{/assets/cropper/images/picture.jpg}" alt="Picture">
+    </div>
+    <div class="col col-3">
+        <div class="preview">
+            <img id="img" src="">
+        </div>
+    </div>
+    <h3>Result</h3>
+    <p>
+        <button type="button" id="button">Crop</button>
+    </p>
+    <div id="result"></div>
+</div>
+<script th:src="@{/assets/cropper/js/cropper.js}"></script>
+<script>
+    function getRoundedCanvas(sourceCanvas) {
+        var canvas = document.createElement('canvas');
+        var context = canvas.getContext('2d');
+        var width = sourceCanvas.width;
+        var height = sourceCanvas.height;
+
+        canvas.width = width;
+        canvas.height = height;
+        context.imageSmoothingEnabled = true;
+        context.drawImage(sourceCanvas, 0, 0, width, height);
+        context.globalCompositeOperation = 'destination-in';
+        context.beginPath();
+        context.arc(width / 2, height / 2, Math.min(width, height) / 2, 0, 2 * Math.PI, true);
+        context.fill();
+        return canvas;
+    }
+
+    window.addEventListener('DOMContentLoaded', function () {
+        var image = document.getElementById('image');
+        var button = document.getElementById('button');
+        var result = document.getElementById('result');
+        var previews = document.querySelectorAll('.preview');
+        var croppable = false;
+        var cropper = new Cropper(image, {
+            aspectRatio: 1,
+            viewMode: 1,
+            dragMode:'move',
+            ready: function () {
+                croppable = true;
+                var clone = this.cloneNode();
+
+                clone.className = '';
+                clone.style.cssText = (
+                    'display: block;' +
+                    'width: 100%;' +
+                    'min-width: 0;' +
+                    'min-height: 0;' +
+                    'max-width: none;' +
+                    'max-height: none;'
+                );
+                each(previews, function (elem) {
+                    var croppedCanvas;
+                    var roundedCanvas;
+                    var roundedImage = document.getElementById('img');
+
+                    if (!croppable) {
+                        return;
+                    }
+
+                    // Crop
+                    croppedCanvas = cropper.getCroppedCanvas();
+
+                    // Round
+                    roundedCanvas = getRoundedCanvas(croppedCanvas);
+
+                    // Show
+                    // roundedImage = document.createElement('img');
+                    roundedImage.src = roundedCanvas.toDataURL();
+                    elem.innerHTML = '';
+                    elem.appendChild(roundedImage);
+                });
+            },
+            crop: function (event) {
+                var data = event.detail;
+                var cropper = this.cropper;
+                var imageData = cropper.getImageData();
+                var previewAspectRatio = data.width / data.height;
+
+                var croppedCanvas;
+                var roundedCanvas;
+                var roundedImage = document.getElementById('img');
+
+                if (!croppable) {
+                    return;
+                }
+
+                // Crop
+                croppedCanvas = cropper.getCroppedCanvas();
+
+                // Round
+                roundedCanvas = getRoundedCanvas(croppedCanvas);
+
+                // Show
+
+                roundedImage.src = roundedCanvas.toDataURL();
+
+                // each(previews, function (elem) {
+                //     var previewImage = elem.getElementsByTagName('img').item(0);
+                //     var previewWidth = elem.offsetWidth;
+                //     var previewHeight = previewWidth / previewAspectRatio;
+                //     var imageScaledRatio = data.width / previewWidth;
+                //
+                //     elem.style.height = previewHeight + 'px';
+                //     previewImage.style.width = imageData.naturalWidth / imageScaledRatio + 'px';
+                //     previewImage.style.height = imageData.naturalHeight / imageScaledRatio + 'px';
+                //     previewImage.style.marginLeft = -data.x / imageScaledRatio + 'px';
+                //     previewImage.style.marginTop = -data.y / imageScaledRatio + 'px';
+                // });
+            },
+        });
+
+        button.onclick = function () {
+            var croppedCanvas;
+            var roundedCanvas;
+            var roundedImage;
+
+            if (!croppable) {
+                return;
+            }
+
+            // Crop
+            croppedCanvas = cropper.getCroppedCanvas();
+
+            // Round
+            roundedCanvas = getRoundedCanvas(croppedCanvas);
+
+            // Show
+            roundedImage = document.createElement('img');
+            roundedImage.src = roundedCanvas.toDataURL();
+            result.innerHTML = '';
+            result.appendChild(roundedImage);
+        };
+    });
+    function each(arr, callback) {
+        var length = arr.length;
+        var i;
+
+        for (i = 0; i < length; i++) {
+            callback.call(arr, arr[i], i, arr);
+        }
+
+        return arr;
+    }
+</script>
+</body>
+</html>

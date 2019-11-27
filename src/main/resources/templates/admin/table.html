@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--[if IE 9]>         <html class="ie9 no-focus"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-focus"> <!--<![endif]-->
+<header th:replace="admin/header::header-fragment"></header>
+<body>
+<!-- Page Container -->
+<div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+
+    <!-- 引入页面头header-fragment -->
+    <div th:replace="admin/header::header-nav"></div>
+
+    <!-- 侧边菜单栏 -->
+    <div th:replace="admin/sidebar::sidebar-nav(activeUrl='table.html',openUrl='table')"></div>
+    <!--END 侧边菜单栏 -->
+
+    <main id="main-container">
+        <!-- Page 头部 -->
+            <div>
+                <h1>仪表盘Table</h1>
+                <h2>欢迎Table</h2>
+            </div>
+        <!-- END Page 头部 -->
+    </main>
+
+    <footer th:replace="admin/footer::footer-fragment"></footer>
+
+</div>
+<!-- END Page Container -->
+
+
+<!-- OneUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock, Appear, CountTo, Placeholder, Cookie and App.js -->
+<script th:src="@{/assets/js/core/jquery.min.js}"></script>
+<script th:src="@{/assets/js/core/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/core/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/assets/js/core/jquery.scrollLock.min.js}"></script>
+<script th:src="@{/assets/js/core/jquery.appear.min.js}"></script>
+<script th:src="@{/assets/js/core/jquery.countTo.min.js}"></script>
+<script th:src="@{/assets/js/core/jquery.placeholder.min.js}"></script>
+<script th:src="@{/assets/js/core/js.cookie.min.js}"></script>
+<script th:src="@{/assets/js/app.js}"></script>
+
+<!-- Page Plugins -->
+<script th:src="@{/assets/js/plugins/slick/slick.min.js}"></script>
+<script th:src="@{/assets/js/plugins/chartjs/Chart.min.js}"></script>
+
+<script>
+    $(function () {
+        // Init page helpers (Slick Slider plugin)
+        App.initHelpers('slick');
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--[if IE 9]>         <html class="ie9 no-focus"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-focus"> <!--<![endif]-->
+<header th:replace="admin/header::header-fragment"></header>
+<body>
+<!-- Page Container -->
+<div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+
+    <!-- 引入页面头header-fragment -->
+    <header th:replace="admin/header::header-nav"></header>
+
+    <nav th:replace="admin/sidebar::sidebar-nav(activeUrl='index.html',openUrl='index')"></nav>
+
+    <!-- 主页面内容 -->
+    <main id="main-container">
+        <!-- Page 头部 -->
+        <div class="content bg-image overflow-hidden" style="background-image: url('/assets/img/photos/photo3@2x.jpg');">
+            <div class="push-50-t push-15">
+                <h1 class="h2 text-white animated zoomIn">仪表盘</h1>
+                <h2 class="h5 text-white-op animated zoomIn">欢迎管理员</h2>
+            </div>
+        </div>
+        <!-- END Page 头部 -->
+
+        <!-- Page 内容 -->
+        <div class="content">
+        </div>
+        <!-- END Page 内容 -->
+    </main>
+    <!-- END 主页面内容 -->
+
+    <footer th:replace="admin/footer::footer-fragment"></footer>
+
+</div>
+<!-- END Page Container -->
+
+
+<!-- OneUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock, Appear, CountTo, Placeholder, Cookie and App.js -->
+<script th:src="@{/assets/js/core/jquery.min.js}"></script>
+<script th:src="@{/assets/js/core/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/core/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/assets/js/core/jquery.scrollLock.min.js}"></script>
+<script th:src="@{/assets/js/core/jquery.appear.min.js}"></script>
+<script th:src="@{/assets/js/core/jquery.countTo.min.js}"></script>
+<script th:src="@{/assets/js/core/jquery.placeholder.min.js}"></script>
+<script th:src="@{/assets/js/core/js.cookie.min.js}"></script>
+<script th:src="@{/assets/js/app.js}"></script>
+
+<!-- Page Plugins -->
+<script th:src="@{/assets/js/plugins/slick/slick.min.js}"></script>
+<script th:src="@{/assets/js/plugins/chartjs/Chart.min.js}"></script>
+
+<script>
+    $(function () {
+        // Init page helpers (Slick Slider plugin)
+        App.initHelpers('slick');
+    });
+</script>
+</body>
+</html>
