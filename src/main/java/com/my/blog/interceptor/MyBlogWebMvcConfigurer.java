@@ -33,6 +33,8 @@ public class MyBlogWebMvcConfigurer implements WebMvcConfigurer {
                 .excludePathPatterns("/admin/login")
                 .excludePathPatterns("/admin/register")
                 .excludePathPatterns("/admin/uploadImg")
+                .excludePathPatterns("/admin/uploadFile")
+                .excludePathPatterns("/admin/jumpUploadFile")
                 .excludePathPatterns("/assets/**")
                 .excludePathPatterns("/semantic-ui/**");
     }

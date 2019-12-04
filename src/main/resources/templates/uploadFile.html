@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--[if IE 9]>         <html class="ie9 no-focus"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-focus"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="saveAgent" th:action="@{/admin/uploadFile}" method="POST" enctype="multipart/form-data">
+
+    名称：<input type="text" name="userName" />
+    手机号：<input type="text" name="mobile" />
+    照片：<input type="file" name="photo" />
+    <input type="submit" value="提交" id="submitBnt">
+</form>
+</body>
+</html>

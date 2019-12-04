@@ -1,16 +1,21 @@
 package com.my.blog.controller.admin;
 
+import com.my.blog.entity.UserInfo;
 import com.my.blog.po.User;
 import com.my.blog.service.AdminUserService;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Base64;
 
 /**
@@ -18,6 +23,7 @@ import java.util.Base64;
  */
 @Controller
 @RequestMapping("/admin")
+@Log4j
 public class HomeController {
 
     @Autowired
@@ -128,5 +134,42 @@ public class HomeController {
     public String logout(HttpSession session) {
         session.removeAttribute("user");
         return "redirect:/admin/login";
+    }
+
+    /**
+     * 跳转到文件上传页面
+     * @return
+     */
+    @GetMapping("/jumpUploadFile")
+    public String jumpUploadFile(){
+        return "uploadFile";
+    }
+
+    @PostMapping("/uploadFile")
+    @ResponseBody
+    public String uploadFile(UserInfo agentInfo){
+        System.out.println("agentInfo = [" + agentInfo.toString() + "]");
+        MultipartFile file = agentInfo.getPhoto();
+        if(file.isEmpty()){
+            return "请选择一个文件上传";
+        }
+        String filename = file.getOriginalFilename();
+        long fileSize = file.getSize();
+        System.out.println("文件名称" + filename + "-------文件大小" + fileSize+"B");
+        String path = "E:/test";
+        File dest = new File(path + "/" + filename);
+        if (!dest.getParentFile().exists()) {
+            //父目录不存在就创建一个
+            dest.getParentFile().mkdir();
+        }
+        //保存文件
+        try {
+            file.transferTo(dest);
+            return "文件上传成功";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "文件上传失败";
+        }
+
     }
 }
